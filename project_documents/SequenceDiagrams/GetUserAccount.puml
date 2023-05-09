@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Get User Account
+actor User as c
+participant "Website Profile page" as wrp
+participant GetUserAccountActivity as cua
+database UserAccounts
+
+c -> wrp: Visit Profile page
+wrp -> cua: Send get User Information request
+cua -> UserAccounts: load UserAccounts
+cua <- UserAccounts: User data
+cua -> wrp: User information
+wrp -> c: display user information
+@enduml

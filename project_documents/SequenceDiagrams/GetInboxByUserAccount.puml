@@ -1,0 +1,23 @@
+@startuml
+
+actor User as u
+participant "Messages Page" as mp
+participant GetInboxByUserAccountActivity as giuaa
+database Inbox as i
+
+u -> mp : open "Messages Page"
+mp -> giuaa : get inbox by logged in user
+giuaa -> i : getInboxByUserAccountRequest(loggedInUaid)
+
+alt if no inbox found
+i --> giuaa: null = getInboxByUserAccountRequest(loggedInUaid)
+giuaa --> mp : getInboxByUserAccountResult(null)
+mp --> u : Nothing to see here!
+end
+
+i --> giuaa: inbox = getInboxByUserAccountRequest(loggedInUaid)
+giuaa --> mp : getInboxByUserAccountResult(inbox)
+mp --> u : Display inbox
+
+
+@enduml

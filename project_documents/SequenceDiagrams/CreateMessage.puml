@@ -1,0 +1,26 @@
+@startuml
+
+title Create Message
+
+participant User as u
+participant "User Profile" as p
+participant CreateMessageActivity as cia
+database Inbox as i
+database Message as m
+
+u -> p : Send a Message
+p -> cia : sendMessage(loggedInUaid, otherUaid, Message, localDateTime)
+cia -> i : getExistingInboxRequest(loggedInUaid, otherUaid)
+alt if (inbox) is (not existing) then
+i --> cia : null = getExistingInboxRequest(loggedInUaid, notMyUaid)
+cia -> cia : inboxId = generateInboxId
+cia -> i : createMessageRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+i -> m : message = createInboxRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+end if
+
+i --> cia : inbox = getExistingInboxRequest(loggedInUaid, notMyUaid)
+cia -> cia : inboxId = getInboxId(inbox)
+cia -> i : createMessageRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+i -> m : message = createInboxRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+
+@enduml

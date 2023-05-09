@@ -1,0 +1,17 @@
+@startuml
+
+actor User as u
+participant "Messages Page" as mp
+participant GetMessagesByInboxIdActivity as gmia
+database Message as m
+
+u -> mp : open "Messages Page"
+mp -> gmia : get Messages by inbox ID
+gmia -> m : getMessagesByInboxIdRequest(inboxId)
+
+m --> gmia: messages = getMessagesByInboxIdRequest(inboxId)
+gmia --> mp : getMessagesByInboxIdResult(messages)
+mp --> u : Display Conversations
+
+
+@enduml

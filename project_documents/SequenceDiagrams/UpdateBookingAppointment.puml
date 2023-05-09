@@ -1,0 +1,38 @@
+@startuml
+actor Customer
+participant AppointmentServicePage
+participant Utility
+database Booking
+participant UpdateAppointmentBookingActivity
+database Appointment
+
+Customer -> AppointmentServicePage : Submit Appointment Form
+AppointmentServicePage -> Utility : UpdateAppointmentBookingActivity
+Utility -> Utility : validate Booking ID
+
+alt Booking ID Validation Failed
+AppointmentServicePage <-- Utility : throw InvalidAttributeValueException
+Customer <-- AppointmentServicePage : Unexpected Error Occurred
+end
+
+Utility -> Booking : Booking ID
+
+alt Booking does not exist
+AppointmentServicePage <-- Booking : throw BookingNotFoundException
+Customer <-- AppointmentServicePage : Booking not Found
+end
+
+Booking -> UpdateAppointmentBookingActivity : Booking ID
+Utility <-- UpdateAppointmentBookingActivity : Appointment ID
+Utility <-- Utility : validate Appointment ID
+Utility -> Appointment : find Appointment by Appointment ID
+
+alt Appointment does not exist
+AppointmentServicePage <-- Appointment : throw AppointmentNotFoundException
+Customer <-- AppointmentServicePage : Appointment not Found
+end
+
+UpdateAppointmentBookingActivity <-- Appointment : Appointment ID
+AppointmentServicePage <-- UpdateAppointmentBookingActivity : UpdateAppointmentBookingResult
+Customer <-- AppointmentServicePage : Successfully Updated BookingAppointment
+@enduml

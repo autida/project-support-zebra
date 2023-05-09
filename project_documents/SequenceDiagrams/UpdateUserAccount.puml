@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Update User Account
+actor User as c
+participant "Website Profile page" as wrp
+participant CreateUserAccountActivity as cua
+database UserAccounts
+
+c -> wrp: Submit User Update Form
+wrp -> cua: Send Update Request
+cua -> UserAccounts: save updates
+@enduml

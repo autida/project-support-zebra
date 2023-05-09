@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Create User Account
+actor User as c
+participant "Website Registration page" as wrp
+participant CreateUserAccountActivity as cua
+database UserAccounts
+
+c -> wrp: Submit User Registration Form
+wrp -> cua: CreateUserAccountRequest
+alt if user account Id and user name contains invalid characters
+cua --> wrp: throw InvalidAttributeValueException
+wrp --> c: User Name must not contain invalid characters!
+'else else continue
+end
+cua -> UserAccounts: save new UserAccount
+UserAccounts -> cua:  UserAccountId (uaId)
+cua -> wrp: CreateUserAccountResult
+wrp -> c: Account Successfully Created!
+@enduml

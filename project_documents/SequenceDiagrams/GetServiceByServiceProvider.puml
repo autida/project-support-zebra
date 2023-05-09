@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Get Service by SP
+actor User as c
+participant "Website SP Service page" as wrp
+participant GetServicesByServiceProviderActivity as cua
+database Services as s
+
+c -> wrp: Visit SP page
+wrp -> cua: Send get Service request
+cua -> s: load Services
+alt if Service does not Exist
+s --> cua : return with no item data
+cua --> wrp: throw ServiceNotFoundException and return 400 response
+wrp --> c: Service does not Exist!
+'else else continue
+end
+cua <- s: SP Services
+cua -> wrp: Services
+wrp -> c: display SP Services
+@enduml

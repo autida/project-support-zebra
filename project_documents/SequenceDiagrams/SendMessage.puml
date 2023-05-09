@@ -1,0 +1,23 @@
+@startuml
+
+title Send Message
+
+participant User as u
+participant "Messenger" as m
+participant SendMessageActivity as sma
+database Message as mdb
+
+u -> m: Message Send/Reply from inbox
+m -> sma : sendMessage(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+sma -> mdb : sendMessageRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+
+alt if message body contains invalid characters then
+sma --> m : throw InvalidAttributeValueException
+m --> u : message body must not contain invalid characters!
+end if
+
+mdb --> sma : message =  sendMessageRequest(inboxId, loggedInUaid, otherUaid, Message, localDateTime)
+sma --> m : sendMessageResult(message)
+m --> u : display message
+
+@enduml

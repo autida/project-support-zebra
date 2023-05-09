@@ -1,0 +1,23 @@
+@startuml
+
+
+title Update Review by ID
+actor Customer as c
+participant Dashboard as dsb
+participant CreateReviewActivity as cra
+database Reviews as rdb
+
+c -> dsb : submit review update form
+dsb -> cra : update review request
+
+alt if review feedback contains invalid characters
+   cra --> dsb : throw InvalidAttributeValueException
+   dsb --> c : Review feedback must not contain invalid characters!
+end
+
+cra -> rdb : updateReviewRequest(Service)
+rdb --> cra : review = updateReviewRequest(Service)
+cra --> dsb : updateReviewResult(review)
+dsb --> c : Review updated successfully created!
+
+@enduml

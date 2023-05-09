@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Update Service
+actor SP as c
+participant "Website SP Service page" as wrp
+participant UpdateServiceActivity as cua
+database Services as s
+
+c -> wrp: Submit Service Update Form
+wrp -> cua: UpdateServiceRequest
+cua -> s: save updates
+
+alt if Service does not Exist
+s --> cua : return with no item data
+cua --> wrp: throw ServiceNotFoundException and return 400 response
+wrp --> c: Service does not Exist!
+'else else continue
+end
+
+cua <- s: updated service
+wrp <- cua: UpdateServiceResult
+c <- wrp: Successfully Submitted Service
+
+
+
+@enduml

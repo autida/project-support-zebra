@@ -1,0 +1,37 @@
+@startuml
+
+
+title Get Reviews by Service
+actor User as u
+participant "Website SP Service page" as wrp
+participant GetReviewsByServiceActivity as grsa
+database Reviews as rdb
+
+u -> wrp: Visit SP page
+wrp -> grsa: Send get Service request
+grsa -> rdb: getServicesByServiceProviderRequest(SP)
+alt if Service review does not Exist
+rdb --> grsa : null = getServicesByServiceProviderRequest(SP)
+grsa --> wrp: throw ServiceNotFoundException and return 400 response
+wrp --> u: Service not Found!
+'else else continue
+end
+grsa <-- rdb: Services = getServicesByServiceProviderRequest(SP)
+grsa --> wrp: getServicesByServiceProviderResult(Services)
+wrp --> u: display SP Services
+
+u -> wrp : view reviews
+wrp -> grsa : get reviews by service
+grsa -> rdb : getReviewsByServiceRequest(Service)
+
+alt if no approved reviews yet
+rdb --> grsa : null = getReviewsByServiceRequest(Service)
+grsa --> wrp : throw ServiceReviewNotFoundException
+wrp --> u : No reviews for this service!
+end
+
+rdb --> grsa : reviews = getReviewsByServiceRequest(Service)
+grsa --> wrp : getReviewsByServiceResult(reviews)
+wrp --> u : Reviews
+
+@enduml

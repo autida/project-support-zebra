@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Create Service
+actor SP as c
+participant "Website Service Provider Service page" as sps
+participant CreateServiceActivity as cua
+database Services as s
+
+c -> sps: Submit Service Form
+sps -> cua: CreateServiceRequest
+alt if service name contains invalid characters
+cua --> sps: throw InvalidAttributeValueException
+sps --> c: Service Name must not contain invalid characters!
+'else else continue
+end
+cua -> s: save new Service
+s -> cua:  serviceId
+cua -> sps: CreateServiceResult
+sps -> c: Service Successfully Created!
+@enduml

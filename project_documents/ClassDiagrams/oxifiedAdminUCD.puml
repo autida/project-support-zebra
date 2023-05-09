@@ -1,0 +1,64 @@
+@startuml
+top to bottom direction
+skinparam actorStyle awesome
+
+actor Admin
+
+Admin --> (Sign-up)
+Admin --> (Log-in)
+
+(Log-in) --> (Create Service Provider)
+(Log-in) --> (Retrieve Service Provider)
+
+(Log-in) --> (Create Customer)
+(Log-in) --> (Retrieve Customer)
+(Log-in) --> (Retrieve Appointments)
+(Log-in) --> (Retrieve Booking Calendar)
+
+(Retrieve Service Provider) --> (Update Service Provider)
+(Retrieve Service Provider) --> (Remove Service Provider)
+(Retrieve Service Provider) --> (Retrieve Service Provider Cost)
+(Retrieve Service Provider) --> (Retrieve services of Service Provider)
+(Retrieve services of Service Provider) --> (Retrieve Service Provider Reviews)
+(Retrieve Service Provider Reviews) --> (Approve Service Provider Reviews)
+(Retrieve Service Provider Reviews) --> (Decline Service Provider Reviews)
+
+(Retrieve Customer) --> (Update Customer)
+(Retrieve Customer) --> (Remove Customer)
+(Retrieve Customer) --> (Retrieve Customer Reviews)
+
+' NOTE
+note left of (Sign-up)
+Customer Requirements:
+> Valid Email
+> Username
+> Password
+end note
+
+note top of (Log-in)
+Provide:
+> Username
+> Password
+end note
+
+note right of (Retrieve Service Provider Reviews)
+View Reviews:
+> Low average Reviews
+> Pending Reviews
+> All Reviews
+end note
+
+note top of (Retrieve Appointments)
+View Appointments:
+> Customer
+    - History, Ongoing, Upcoming, Cancelled
+> Service Provider
+    - History, Ongoing, Upcoming, Cancelled
+end note
+
+note top of (Retrieve Booking Calendar)
+View Appointments:
+> Customer
+> Service Provider
+end note
+@enduml

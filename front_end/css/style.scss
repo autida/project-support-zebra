@@ -1,0 +1,562 @@
+$minwidth720query : 1300;
+$theme-color-primary : #252B47;
+$messageslideaway : 0;
+.weight-normal {
+    font-weight: 300;
+}
+.message-inbox {
+    padding: 1px;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    &.center {
+        justify-content: center;
+    }
+    &.space-between {
+        justify-content: space-between;
+    }
+}
+.flex-item {
+    display: inline-flex;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.center {
+        justify-content: center;
+    }
+    &.space-between {
+        justify-content: space-between;
+    }
+}
+.grid.one-column {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+}
+.grid.two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+}
+.grid.three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+.grid.four-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+}
+.grid.five-columns {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+}
+
+.message-inbox:hover {
+    background-color: $theme-color-primary;
+    cursor: pointer;
+}
+@mixin one-column {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: auto;
+}
+@mixin two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+}
+@mixin three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+@mixin four-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+}
+@mixin button-primary {
+    padding: 10px 30px;
+    background-color: #F2EFEB;
+    color: #000;
+}
+@mixin transition($x...){
+    -webkit-transition: $x;
+    -moz-transition: $x;
+    -ms-transition: $x;
+    -o-transition: $x;
+    transition: $x;
+  }
+@mixin scrolltoleft($x){
+    from { width: 0px;  }
+    to { width: $x;  }
+  }
+@keyframes slideaway {
+    from { display: block;  }
+    to { transform: translatex(-100%); opacity: 0; }
+  }
+  @keyframes slidein {
+    from { transform: translatex(-100%); opacity: 0; }
+    to { transform: translatex(0%); opacity: 100; }
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Solway', serif;
+    background-color: #FAFCFF;
+    
+    label {
+        font-weight: 700;
+    }
+}
+    //z-index: 1;
+    @mixin center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    @media (min-width : 720px) {
+        
+         .header {
+            color: #000;
+            width: 100%;
+            z-index: 333;
+            .nav-container {
+                .nav-split-container {
+                    width: 1300px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                ul.nav-list {
+                    display: flex;
+                    height: 40px;
+                    margin: 0;
+                    padding: 0;
+                    align-items: center;
+                    justify-content: space-between;
+                    li {
+                        display: inline-flex;
+                    }
+                    .nav-btn-join{
+                      @include button-primary;
+                      text-transform: capitalize;
+                    }
+                }
+            }
+            
+            .btn-home-service-cta {
+                text-transform: uppercase;
+            }
+            .nav-split-container{
+                display: flex;
+                .nav-split-content {
+                    display: flex;
+                    padding: 20px 30px;
+                    width: 100%;
+                    align-items: center;
+                    .nav-list {
+                        width: 500px;
+                        margin-left: auto;
+                        margin-right: auto;
+                        display: flex;
+                        color:#E5EDFF;
+                        .logo {
+                            font-size: 30px;
+                            display: inline-block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            text-transform: uppercase;
+                            font-family: 'Playfair Display SC', serif;
+                        }
+                    }
+                }
+            }
+         }
+         .header.pages {
+            @extend .header;
+           background-color: $theme-color-primary;
+         }
+        div.main-container {
+            position: relative;     
+            width: 100%;
+            display: flex;
+            color: #E5EDFF ;
+           .main-content{
+                width: 1300px;
+                height: 100vh;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
+                .hero-container {
+                    display: flex;
+                    height: 100%;
+                    align-items: center;
+
+                    .hero {
+                        width: 1000px;
+                        margin-left: auto;
+                        margin-right: auto;
+                        .title {
+                            font-size: 75px;
+                            text-align: center;
+                            font-family: 'Playfair Display SC', serif;
+                        }
+                        .cta-container {
+                           display: flex;
+                           justify-content: center;
+                            .cta-content {
+                                display: flex;
+                                justify-content: center;
+                                padding: 15px;
+                                width: 450px;
+                                .btn-home-service-cta {
+                                    padding: 20px 30px;
+                                    background-color: #F2EFEB;
+                                    color: #000;
+                                    
+                                }
+                                .find {
+                                    margin-right: 10px;
+                                }
+                                .offer {
+                                    margin-left: 10px;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            .home-bg-container {
+                position: absolute;
+                top: -78px;
+                width: 100%;
+                z-index: -999;
+                .home-bg-content {
+                    display: flex;
+                    width: 1300px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    .home-bg-split-content{
+                        height: 95vh;
+                        width: 100%;
+                    }
+                    .left {
+                        background-color: $theme-color-primary;
+                    }
+                    .right {
+                       position: relative;
+                        background-size: cover;
+                        transform: scale();
+                        .img-home-bg-right {
+                            position: absolute;
+                            height: 100%;
+                            width: 100%;
+                            background-color: #252B47;
+                            background-image: url("../images/Photo - home.jpg");
+                            background-size: cover;
+                            background-clip: border-box;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-blend-mode: overlay;
+                        }
+                    }
+                }
+            }
+        }
+        section {
+            width: 100%;
+            .section-content {
+                width: 1300px;
+                margin-left: auto;
+                margin-right: auto;
+                .card-service {
+                    display: inline-block;
+                    text-align: center;
+                    margin-top: 50px;
+                    .card-service-title{
+                        margin : 20px;
+                        text-transform: capitalize;
+                        font-family: 'Playfair Display SC', serif;
+                        font-size: 20px;
+                    }
+                }
+                .grid.manpower, .grid.services{
+                    @include four-columns;
+                }
+                .grid.booking{
+                    @include three-columns;
+                }
+              
+                .profile-img {
+                    width:200px;
+                    height: 200px;
+                }
+                .service-img {
+                    width:271px;
+                    height: 173px;
+                }
+                .card-details {
+                    margin-top: 10px;
+                    text-align: left;
+                }
+                .button.edit-profile {
+                    @include button-primary; 
+                    display: flex;  
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 10px 0;
+                    padding: 0;
+                    height: 40px;
+                }
+            } 
+        }
+        
+       .booking-appointment-next{
+            display: flex;
+            height: 250px;
+            margin: 10px 0;
+            .details {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+              padding: 20px 30px;  
+              justify-items: space-between;
+              label.weight-normal.booking-label {
+                display: inline-flex;
+                width: 100px;
+              }
+            }
+       }
+       .text-base-content {
+            width: 360px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #FFFFFF;
+            padding: 15px 5px;
+            .card-date-price {
+                display: flex;
+                justify-content: space-between;
+            }
+            .card-service-category {
+                display: flex;
+
+                .label-info {
+                    width: 100%;
+                    label {
+                        display: block;
+                        margin-bottom: 10px;
+                    } 
+                }
+            }
+            .card-buttons {
+                display: flex;
+                
+                .btn {
+
+                    @include button-primary;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    margin: 0 5px;
+                    font-size: 16px;
+                    width: 170px;
+                    text-align: center;
+                }
+            }
+            .card-location {
+                .label-info {
+                    label {
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+       }
+       .modal-container {
+
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-right: 30px;
+        margin-bottom: 30px;
+            .modal-content{
+                position: relative;
+                .btn-messenger {
+                    
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    box-shadow: 5px 5px 8px rgba(37,43,71, 0.5);
+                    &:hover {
+                        width: 77px;
+                        height: 77px;
+                    }
+                }
+                .search-content {
+                    display: flex;
+                    justify-content: center;
+                    position: relative;
+                    &::before {
+                        position: absolute;
+                        left: 0;
+                        top: 10px;
+                        content: url("../images/search-icon.svg");
+                        }
+                    .search {
+                        width: 100%;
+                        height: 30px;
+                        margin: 5px 0;
+                        padding-left: 30px;
+                        
+                    }
+                }
+            }
+            .messenger {
+                position: absolute;
+                right: 40px;
+                bottom: 75px;
+                border-radius: 5px;
+                padding: 5px;
+                box-shadow: 5px 5px 8px rgba(37,43,71, 0.5);
+                transition-timing-function: ease-in;
+                transition: 0.5s;
+                height: 0px;
+                width: 0px;
+                opacity: 0;
+                 .message-inbox-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 5px;
+                    margin: 1px 0;
+                    background-color: rgb(221, 214, 214);
+                    .not-my-profile-picture {
+                        padding: 5px;
+                        .inbox-profile-picture {
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50px;
+                        }
+                    }
+                    .not-my-name-last-message {
+                         width: 100%;
+                         padding: 0 5px;
+                    }
+                 }
+            }
+            .messenger.show {
+                opacity: 100;
+                height: 500px;
+                width: 300px;
+                background-color: rgb(236, 231, 231);
+                z-index: 2;
+               
+                animation : slidein 0.5s;
+                animation-fill-mode: forwards;
+                &.clicked {
+                    animation : slideaway 0.5s;
+                    animation-fill-mode: forwards;
+                    //display: none;
+                    // opacity: 0;
+                    // display: none;
+                   }
+            }
+            .convo {
+                position: absolute;
+                height: 500px;
+                width: 0px;
+                background-color: rgb(236, 231, 231);
+                right: 40px;
+                bottom: 75px;
+                border-radius: 5px;
+                padding: 5px;
+                box-shadow: 5px 5px 8px rgba(37,43,71, 0.5);
+                transition-timing-function: ease-in;
+                transition: 0.5s;
+                opacity: 0;
+                &.show {
+                    width: 300px;
+                    opacity: 100;
+                    transition: width 0.5s;
+                    .convo-header {
+                        padding: 5px 10px;
+                        box-shadow: 1px 1px 4px 1px #000;
+                    }
+                    .convo-main-container {
+                        
+                        .convo-main-content {
+                            padding: 10px 10px;
+                            margin: 10px 0;
+                            .message-content {
+                                margin-bottom: 10px;
+                               .message-body {
+                                border-radius: 50px 50px 0px 50px;
+                                background-color: #acb1c5;
+                                &.not-mine {
+                                    border-radius: 50px 50px 50px 0;
+                                    background-color: #acb6e2;
+                                }
+                               }
+
+                            }
+                        }
+                        .message-profile-picture-container {
+                            width: 32px;
+                            height: 32px;
+                            padding: 2px;
+                            img {
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 50px;
+                            }
+                        }
+                    }
+                    .goto-icon, .btn-message-back {
+                        width: 30px;
+                        cursor: pointer;
+                    }
+                    
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                    .message-body {
+                        position: relative;
+                        padding: 9px 5px;
+                        background-color: rgb(209, 203, 203);
+                        
+                        p {
+                            display: inline;
+                            padding-left: 5px;
+                        }
+                        margin-bottom: 2px;
+                        .message-time {
+                            position: absolute;
+                            bottom: -9px;
+                            right: 0;
+                            padding: 0 10px;
+                            &.not-mine {
+                                left: 0;
+                            }
+                        }
+                    }
+                }
+
+            }
+       }
+    } //@view-port min 720px media query ends here

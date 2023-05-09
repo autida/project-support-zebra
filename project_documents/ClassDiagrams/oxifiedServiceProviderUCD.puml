@@ -1,0 +1,47 @@
+@startuml
+top to bottom direction
+skinparam actorStyle awesome
+
+actor Service_Provider
+
+Service_Provider --> (Sign-up)
+Service_Provider --> (Log-in)
+(Log-in) --> (Create Profile)
+(Log-in) --> (Create Service)
+(Log-in) --> (Create Service Cost)
+(Log-in) --> (Retrieve list of Services)
+(Retrieve list of Services) --> (Retrieve review of Services)
+(Retrieve list of Services) --> (Booking Calendar)
+(Retrieve list of Services) --> (Retrieve Appointments)
+(Retrieve list of Services) --> (Update Service)
+(Retrieve list of Services) --> (Update Service Cost)
+(Log-in) --> (Message)
+
+' NOTE
+note left of (Sign-up)
+Customer Requirements:
+> Valid Email
+> Username
+> Password
+end note
+
+note top of (Log-in)
+Provide:
+> Username
+> Password
+end note
+
+note top of (Message)
+Can message:
+> Admin
+> Customer
+end note
+
+note right of (Retrieve Appointments)
+Can view:
+> Upcoming Appointment
+> Cancelled Appointment
+> Appointment History
+end note
+
+@enduml
